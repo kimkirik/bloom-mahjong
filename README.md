@@ -6,7 +6,7 @@
 
 [ChatGPT 공개 게임](https://bloom-mahjong-garden.kimkirik.chatgpt.site/) · [Vercel 게임](https://bloom-mahjong.vercel.app/) · [자동 검증 결과](https://github.com/kimkirik/bloom-mahjong/actions/workflows/ci.yml)
 
-PC의 넓은 화면에서 즐기는 꽃·과일 연결 퍼즐입니다. 30종의 새로 제작한 3D 렌더 타일, 입체 타일 표면, Web Audio 효과음과 잔잔한 배경음악, 전체화면, 서버에 보관되는 점수 기록을 제공합니다.
+PC의 넓은 화면에서 즐기는 꽃·과일 연결 퍼즐입니다. 30종의 새로 제작한 3D 렌더 타일, 입체 타일 표면, Web Audio 효과음과 오케스트라 배경음악, 전체화면, 서버에 보관되는 점수 기록을 제공합니다.
 
 게임24 [퍼즐마작2](http://www.game24.co.kr/game.php?gamecode=mahjong)의 실제 규칙을 확인해 새로 구현했습니다. 원본 코드·이미지·음원·Flash 파일을 이 저장소에 포함하지 않았습니다. 원작과 제휴한 서비스가 아닙니다.
 
@@ -80,11 +80,12 @@ npx wrangler deploy --config dist/server/wrangler.json
 ## 그래픽과 음향
 
 - `public/tiles-1.png`, `public/tiles-2.png`: 이 프로젝트를 위해 AI로 새로 생성한 3D 렌더 스프라이트. 4×4 시트에서 총 30종 사용.
-- 효과음과 배경음악: Web Audio로 실시간 합성. 배경음악은 58 BPM의 부드러운 화음과 멜로디로, 게임 시작 뒤 재생되고 일시정지·종료·탭 이동 시 멈춥니다. 외부 음원 파일을 사용하지 않습니다.
+- 효과음: Web Audio로 실시간 합성. 연속 성공 시 음높이가 올라가며 마지막 10초에는 짧은 알림음을 냅니다.
+- 배경음악: **Run Amok — Kevin MacLeod**. 현악·관악·타악으로 구성된 148 BPM의 경쾌한 오케스트라 음악. **CC BY 4.0**으로 사용하며 원곡 MP3를 앱에 포함합니다. 게임 시작 후 재생, 일시정지·종료·탭 이동 시 정지합니다. 출처·라이선스는 게임 방법과 `public/audio/ATTRIBUTION.md`에 표시했습니다.
 - 타일 경계: `lib/tile-art.ts`의 실제 그림별 좌표로 잘라내어 이웃한 꽃 조각이 카드 가장자리에 노출되지 않게 처리합니다.
 - 타일 입체감: CSS 원근·높이·그림자. WebGL 3D 모델 엔진은 사용하지 않습니다.
 - 점수 연출 글꼴: Jua (SIL Open Font License 1.1). `public/fonts/Jua-OFL.txt`에 라이선스 포함. 자체 호스팅하므로 게임 실행 중 Google Fonts나 GitHub에 접속하지 않습니다.
-- 연속 성공 시 큰 점수와 콤보 문구가 튀어나옵니다. 콤보는 시각 연출이며 기존 점수 규칙을 바꾸지 않습니다.
+- 연속 성공 시 배경이 투명한 큰 점수·콤보 문구와 반짝임이 튀어나옵니다. 남은 30초에는 시간 표시를 강조하고 마지막 10초에는 짧은 알림음을 냅니다. 콤보는 시각 연출이며 기존 점수 규칙을 바꾸지 않습니다.
 - 아이콘: Lucide. 빌드 도구의 별도 라이선스는 `build/`와 `vendor/`의 고지를 유지합니다.
 
 ## Vercel 배포
