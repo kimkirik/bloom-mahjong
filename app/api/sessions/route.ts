@@ -1,0 +1,3 @@
+import { getDb } from '../../../db';
+import { hashToken,jsonError,sameOrigin } from '../../../lib/server-game';
+export async function POST(request:Request){if(!sameOrigin(request))return jsonError('허용되지 않은 요청입니다.',403);try{const id=crypto.randomUUID(),token=crypto.randomUUID()+crypto.randomUUID(),seed=crypto.getRandomValues(new Uint32Array(1))[0],createdAt=Date.now();await getDb().prepare('INSERT INTO sessions (id,token_hash,seed,created_at) VALUES (?,?,?,?)').bind(id,await hashToken(token),seed,createdAt).run();return Response.json({id,token,seed},{status:201,headers:{'Cache-Control':'no-store'}});}catch(error){console.error('Session creation failed',error);return jsonError('게임을 준비하지 못했습니다. 잠시 후 다시 시도해 주세요.',503);}}
