@@ -39,3 +39,97 @@ footer{min-height:76px;gap:12px;padding:12px 0}.stage-track{gap:7px}.stage-track
 @media(max-width:650px){.game-app{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right));padding-bottom:env(safe-area-inset-bottom)}header{height:63px;gap:7px}.brand{gap:6px}.brand b{font-size:22px;letter-spacing:1px}.brand .brand-flower{padding:5px;border-radius:11px}.brand-flower svg{width:22px;height:22px}.brand .brand-sub{font-size:8px;letter-spacing:.6px}.brand span{display:grid}nav{gap:3px}nav button,nav button:last-child{padding:8px;font-size:0;gap:0;border-radius:10px}nav button svg{width:16px;height:16px}.game-top{display:block;padding:12px 0}.garden-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.garden-title .eyebrow{display:none}.garden-title h1{font-size:22px;margin:0}.stats{gap:7px;justify-content:space-between}.stats>div{min-width:0;flex:1;grid-template-columns:18px auto;column-gap:5px;padding:8px;border-radius:12px}.stats>div>svg{width:17px;height:17px}.stats span{font-size:10px}.stats strong{font-size:24px}.stats small{display:none}.board-shell{border-radius:18px}.board-caption{padding:0 13px;height:40px}.board-caption>span:first-child{font-size:13px}.board-caption em{display:none}.streak-meter{font-size:10px;gap:4px}.streak-pips{gap:2px;margin-left:1px}.streak-pips i{width:8px;height:5px}.board{padding:4px 8px 15px}.tile-grid{gap:2px;width:min(100%,235cqh);aspect-ratio:2.42}.tile{box-shadow:0 2px 0 #a2b982,0 3px 3px #173c2d}.tile.selected{outline-width:2px;outline-offset:0}footer{min-height:96px;flex-direction:column;justify-content:center;gap:10px;padding:10px 0}.stage-track span{height:24px;width:24px}.tools{width:100%;justify-content:center;gap:7px}.tools button{font-size:15px;padding:9px 12px}.tools kbd{display:none}.start-bouquet{scale:.85;margin-bottom:4px}.start-card h2{font-size:35px}.start-card p{font-size:12px}.start-card .primary{font-size:18px;padding:13px 23px}.start-card{padding:16px}.start-card .eyebrow{font-size:10px}.start-note{font-size:10px}.feedback-burst i{--distance:100px!important;font-size:24px}.error-title{-webkit-text-stroke-width:6px}.error-symbol{width:42px;height:42px;font-size:32px;line-height:37px}.arcade-word{-webkit-text-stroke-width:5px}.points-pop{-webkit-text-stroke-width:6px}.modal h2{font-size:26px}}
 @media(max-height:540px){header{height:45px}.brand .brand-flower{padding:4px}.brand-flower svg{width:22px;height:22px}.brand b{font-size:22px}.brand .brand-sub{display:none}.game-top{padding:7px 0}.garden-title h1{font-size:22px}.garden-title .eyebrow{display:none}.stats>div{padding:5px 10px;min-width:105px}.stats strong{font-size:23px}.stats span{font-size:10px}.board-caption{height:28px}.board{padding:3px 14px 13px}.board-shell{border-radius:16px}footer{min-height:51px;height:auto;padding:7px 0}.tools button{padding:6px 12px;font-size:15px}.start-bouquet,.start-note,.start-card>.eyebrow{display:none}.start-card h2{font-size:30px;margin:4px 0 7px}.start-card p{font-size:12px;margin:0 0 10px}.start-card .primary{padding:9px 22px;font-size:17px}.start-card .text-button{padding:9px}.feedback-copy{zoom:.72}.brand-flower{box-shadow:none!important}}
 @media(prefers-reduced-motion:reduce){.feedback-copy,.feedback-burst i,.arcade-word>span,.points-pop,.tile-wrong,.garden-lights i,.bouquet-tile,.score-stat strong,.timer-stat strong{animation:none!important}.feedback-copy{opacity:1;transform:none}.feedback-burst{display:none}}
+
+/* In phone landscape, one compact control strip leaves the height to the cards. */
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 1200px) {
+  .game-app {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: 34px minmax(0, 1fr);
+    gap: 4px 8px;
+    padding: max(3px, env(safe-area-inset-top)) max(5px, env(safe-area-inset-right)) max(4px, env(safe-area-inset-bottom)) max(5px, env(safe-area-inset-left));
+    height: 100dvh;
+    min-height: 0;
+  }
+  .game-top { grid-area: 1 / 1; display: flex; padding: 0; min-width: 0; }
+  .garden-title, .brand { display: none; }
+  .stats { gap: 5px; width: 100%; }
+  .stats > div {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    min-width: 0;
+    height: 32px;
+    padding: 3px 6px;
+    border-radius: 9px;
+    box-shadow: none;
+  }
+  .stats > div > svg { width: 14px; height: 14px; flex: 0 0 auto; }
+  .stats span { font-size: 9px; white-space: nowrap; }
+  .stats strong { font-size: 21px; line-height: 1; letter-spacing: 0; white-space: nowrap; }
+  .stats small { display: none; }
+  header { grid-area: 1 / 2; height: 34px; border: 0; gap: 0; }
+  nav { gap: 3px; }
+  nav button, nav button:last-child {
+    width: 31px;
+    height: 32px;
+    padding: 7px;
+    gap: 0;
+    font-size: 0;
+    border-radius: 9px;
+  }
+  nav button svg { width: 16px; height: 16px; }
+  .music-label { display: none; }
+  footer {
+    grid-area: 1 / 3;
+    min-height: 0;
+    height: 34px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0;
+    gap: 5px;
+  }
+  .stage-track { gap: 0; }
+  .stage-track span { display: none; }
+  .stage-track .current { display: flex; align-items: center; justify-content: center; width: 31px; height: 27px; font-size: 12px; box-shadow: none; border-radius: 9px; }
+  .stage-track .current::after { content: '/6'; font: 9px Arial, sans-serif; }
+  .tools { gap: 4px; width: auto; }
+  .tools button { height: 31px; min-width: 31px; padding: 6px 7px; gap: 4px; font-size: 0; border-radius: 9px; box-shadow: 0 2px 0 #123f3c; }
+  .tools button:first-child { box-shadow: 0 2px 0 #967444; }
+  .tools button svg { width: 16px; height: 16px; }
+  .tools b { font: 13px 'BLOOM Jua', sans-serif; padding: 1px 4px; }
+  .tools kbd, .footer-note { display: none; }
+  .board-shell { grid-area: 2 / 1 / 3 / -1; border-radius: 12px; border-width: 1px; box-shadow: inset 0 0 0 3px #0d443a, 0 2px 0 #0b302e; }
+  .board-shell::before { inset: 4px; border-radius: 8px; }
+  .board-caption { display: none; }
+  .board { padding: 8px 5px 10px; }
+  /* Reserve a small perimeter for the original outside-the-board connection. */
+  .tile-grid { width: min(94%, 226cqh); aspect-ratio: 2.42; gap: clamp(2px, .36vw, 4px); padding: 0 2px 3px; }
+  .tile { box-shadow: 0 3px 0 #a2b982, 0 4px 4px #06291f70; }
+  .tile.selected { outline-width: 2px; outline-offset: 1px; transform: translateY(-2px); }
+  .time-track { height: 3px; }
+  .bloom-streak .board-shell, .time-pressure .board-shell { box-shadow: inset 0 0 0 3px #795f342b, 0 2px 0 #684e37; }
+  .start-card { padding: 10px 20px; }
+  .start-bouquet, .start-note, .start-card > .eyebrow { display: none; }
+  .start-card h2 { font-size: clamp(24px, 6dvh, 34px); margin: 3px 0 8px; }
+  .start-card p { font-size: 12px; margin-bottom: 12px; }
+  .start-card .primary { font-size: 17px; padding: 9px 23px; }
+  .start-card .text-button { font-size: 12px; padding: 9px; }
+  .feedback-copy { zoom: .72; }
+  .toast { bottom: max(10px, env(safe-area-inset-bottom)); padding: 9px 16px; font-size: 12px; }
+}
+@media (orientation: landscape) and (max-height: 600px) and (max-width: 750px) {
+  .game-app { gap: 3px 5px; }
+  .stats span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .stats > div { padding: 3px 5px; gap: 4px; }
+  .stats strong { font-size: clamp(15px, 2.6vw, 19px); }
+  .stage-track { display: none; }
+}
+@media (orientation: landscape) and (max-height: 300px) {
+  .start-card h2 { font-size: 24px; }
+  .start-card p { display: none; }
+  .start-card .text-button { padding: 7px; }
+}
