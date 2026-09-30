@@ -4,9 +4,9 @@
 
 설치나 로그인 없이 누구나 플레이할 수 있습니다. GitHub 실행 주소를 누르면 점수 저장 기능이 있는 공개 게임으로 바로 연결됩니다.
 
-[공개 게임 직접 열기](https://bloom-mahjong-garden.kimkirik.chatgpt.site/) · [자동 검증 결과](https://github.com/kimkirik/bloom-mahjong/actions/workflows/ci.yml)
+[ChatGPT 공개 게임](https://bloom-mahjong-garden.kimkirik.chatgpt.site/) · [Vercel 게임](https://bloom-mahjong.vercel.app/) · [자동 검증 결과](https://github.com/kimkirik/bloom-mahjong/actions/workflows/ci.yml)
 
-PC의 넓은 화면에서 즐기는 꽃·과일 연결 퍼즐입니다. 30종의 새로 제작한 3D 렌더 타일, 입체 타일 표면, Web Audio 효과음, 전체화면, 서버에 보관되는 점수 기록을 제공합니다.
+PC의 넓은 화면에서 즐기는 꽃·과일 연결 퍼즐입니다. 30종의 새로 제작한 3D 렌더 타일, 입체 타일 표면, Web Audio 효과음과 잔잔한 배경음악, 전체화면, 서버에 보관되는 점수 기록을 제공합니다.
 
 게임24 [퍼즐마작2](http://www.game24.co.kr/game.php?gamecode=mahjong)의 실제 규칙을 확인해 새로 구현했습니다. 원본 코드·이미지·음원·Flash 파일을 이 저장소에 포함하지 않았습니다. 원작과 제휴한 서비스가 아닙니다.
 
@@ -75,11 +75,28 @@ npx wrangler deploy --config dist/server/wrangler.json
 
 서버가 게임별 난수 시드와 저장 토큰을 발급합니다. 종료 시 클라이언트가 선택 기록을 제출하면 서버가 연결·시간·힌트·보너스를 다시 계산합니다. 입력한 점수 숫자를 그대로 저장하지 않습니다. 게임 ID가 기본 키이므로 중복 클릭 및 동시 재시도는 한 기록만 생성합니다. 저장 오류 시 이름과 플레이 기록은 열린 화면에 남아 재시도할 수 있습니다.
 
-캐주얼 게임용 기록 기능이며, 자동 플레이나 변조된 클라이언트에 대한 대회 수준의 부정행위 방지 시스템은 아닙니다. 게임 중 새로고침하면 진행 중인 판은 초기화됩니다. **저장된 점수는 유지**됩니다. 음량만 기기별 설정으로 브라우저에 저장합니다.
+캐주얼 게임용 기록 기능이며, 자동 플레이나 변조된 클라이언트에 대한 대회 수준의 부정행위 방지 시스템은 아닙니다. 게임 중 새로고침하면 진행 중인 판은 초기화됩니다. **저장된 점수는 유지**됩니다. 효과음 음량, 배경음악 켜기·끄기와 음량을 기기별 설정으로 브라우저에 저장합니다.
 
 ## 그래픽과 음향
 
 - `public/tiles-1.png`, `public/tiles-2.png`: 이 프로젝트를 위해 AI로 새로 생성한 3D 렌더 스프라이트. 4×4 시트에서 총 30종 사용.
-- 효과음: Web Audio로 실시간 합성. 외부 음원 파일을 사용하지 않습니다.
+- 효과음과 배경음악: Web Audio로 실시간 합성. 배경음악은 58 BPM의 부드러운 화음과 멜로디로, 게임 시작 뒤 재생되고 일시정지·종료·탭 이동 시 멈춥니다. 외부 음원 파일을 사용하지 않습니다.
+- 타일 경계: `lib/tile-art.ts`의 실제 그림별 좌표로 잘라내어 이웃한 꽃 조각이 카드 가장자리에 노출되지 않게 처리합니다.
 - 타일 입체감: CSS 원근·높이·그림자. WebGL 3D 모델 엔진은 사용하지 않습니다.
+- 점수 연출 글꼴: Jua (SIL Open Font License 1.1). `public/fonts/Jua-OFL.txt`에 라이선스 포함. 자체 호스팅하므로 게임 실행 중 Google Fonts나 GitHub에 접속하지 않습니다.
+- 연속 성공 시 큰 점수와 콤보 문구가 튀어나옵니다. 콤보는 시각 연출이며 기존 점수 규칙을 바꾸지 않습니다.
 - 아이콘: Lucide. 빌드 도구의 별도 라이선스는 `build/`와 `vendor/`의 고지를 유지합니다.
+
+## Vercel 배포
+
+Vercel은 같은 React 게임 화면과 이미지를 자체 호스팅합니다. `/api/sessions`, `/api/scores` 두 경로만 Vercel Function을 통해 ChatGPT Sites의 공용 점수 서버로 전달하므로 두 실행 주소의 기록실은 같습니다. Vercel에서 시작 및 저장하려면 해당 Sites 서버가 운영 중이어야 합니다. GitHub 소스 저장소는 실행 중 읽지 않습니다.
+
+```sh
+npm ci
+npm run test:vercel
+npx vercel link --project bloom-mahjong
+npm run build:vercel
+npx vercel deploy --prebuilt --prod
+```
+
+빌드 결과는 `.vercel/output`에 생성됩니다. 인증 토큰과 `.vercel/`, `.env*`, 로컬 DB는 원본 압축 파일과 공개 소스에 포함하지 않습니다. GitHub Pages 주소는 ChatGPT 공개 게임으로 연결하는 실행 링크입니다.
