@@ -1,5 +1,11 @@
 # BLOOM · 꽃과 과일 마작
 
+## [▶ 클릭해서 바로 게임하기](https://kimkirik.github.io/bloom-mahjong/)
+
+설치나 로그인 없이 누구나 플레이할 수 있습니다. GitHub 실행 주소를 누르면 점수 저장 기능이 있는 공개 게임으로 바로 연결됩니다.
+
+[공개 게임 직접 열기](https://bloom-mahjong-garden.kimkirik.chatgpt.site/) · [자동 검증 결과](https://github.com/kimkirik/bloom-mahjong/actions/workflows/ci.yml)
+
 PC의 넓은 화면에서 즐기는 꽃·과일 연결 퍼즐입니다. 30종의 새로 제작한 3D 렌더 타일, 입체 타일 표면, Web Audio 효과음, 전체화면, 서버에 보관되는 점수 기록을 제공합니다.
 
 게임24 [퍼즐마작2](http://www.game24.co.kr/game.php?gamecode=mahjong)의 실제 규칙을 확인해 새로 구현했습니다. 원본 코드·이미지·음원·Flash 파일을 이 저장소에 포함하지 않았습니다. 원작과 제휴한 서비스가 아닙니다.

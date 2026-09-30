@@ -15,6 +15,10 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Validate database migrations in deployment archive
+        run: |
+          tar -czf /tmp/bloom-deployment.tar.gz dist
+          node scripts/verify-deployment-archive.mjs /tmp/bloom-deployment.tar.gz
       - run: npm run db:local
       - name: Start local Worker and verify score storage
         run: |
