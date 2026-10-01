@@ -9,7 +9,7 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "BLOOM · 꽃과 과일 마작",
-  description: "큰 화면으로 즐기는 꽃과 과일 마작. 원작의 6단계 규칙, 생생한 효과음, 점수 기록.",
+  description: "큰 화면으로 즐기는 꽃과 과일 마작. 20단계 도전, 생생한 효과음, 점수 기록.",
   other: {
     "codex-preview": "development",
   },
