@@ -142,3 +142,23 @@ footer{min-height:76px;gap:12px;padding:12px 0}.stage-track{gap:7px}.stage-track
 .stage-progress .done{background:#8edcb7}.stage-progress .active{height:15px;background:#ffe18b;box-shadow:0 0 6px #ffed9840}
 @media(max-width:650px){.stage-progress i{width:4px;height:7px}.stage-progress .active{height:11px}}
 @media(orientation:landscape) and (max-height:600px) and (max-width:1200px){.stage-progress{display:none}.stage-track .current{width:41px;min-width:41px;padding:0 3px;gap:1px}.stage-track .current::after{font-size:9px}}
+
+/* Keep a stable, forgiving hit target while only the tile face animates. */
+.tile-grid{--tile-gap:clamp(2px,.45vw,7px);gap:var(--tile-gap)}
+.tile,.tile:hover:not(:disabled),.tile:active:not(:disabled),.tile.selected{padding:0;border:0;background:transparent;box-shadow:none;transform:none;overflow:visible;outline:0;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.tile::before{content:'';position:absolute;inset:calc(var(--tile-gap) * -.5)}
+.tile-face{display:flex;align-items:center;justify-content:center;width:100%;height:100%;padding:4%;border:1px solid #fff8ce;border-radius:12%;background:linear-gradient(140deg,#fff 0%,#fffefa 66%,#e4eacb 100%);box-shadow:0 4px 0 #b7c591,0 6px 0 #779a69,0 8px 7px #06291f80,inset 0 1px 2px #fff;overflow:hidden;pointer-events:none;transition:transform .16s,box-shadow .16s}
+.tile:hover:not(:disabled) .tile-face{background:white;transform:translateY(-3px);box-shadow:0 4px 0 #b2be88,0 7px 0 #758857,0 13px 13px #09291da0}
+.tile.selected .tile-face{outline:3px solid #ffe890;outline-offset:2px;box-shadow:0 5px 0 #bba266,0 0 25px #ffee8980;transform:translateY(-4px) rotate(-3deg)}
+.tile:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.tile.tile-wrong{animation:none;outline:0}
+.tile.tile-wrong .tile-face{outline:3px solid #ff9ab6;outline-offset:-3px;animation:tile-oops .4s both}
+/* The close button stays reachable while long result/rule content scrolls. */
+.modal{padding:0;overflow:hidden}
+.modal-scroll{padding:40px;max-height:calc(100dvh - 44px);overflow:auto;overscroll-behavior:contain}
+.modal .close{right:10px;top:10px;width:44px;height:44px;z-index:10;color:#fff4cf;background:#103e39;border:1px solid #d9edbb88;box-shadow:0 2px 6px #001a2444}
+.modal .close svg{width:24px;height:24px}
+.modal .close:hover{background:#326b58}
+@media(max-width:650px){.tile-grid{--tile-gap:2px}.tile-face{box-shadow:0 2px 0 #a2b982,0 3px 3px #173c2d}.tile.selected .tile-face{outline-width:2px;outline-offset:0}.modal-scroll{padding:48px 23px 28px}}
+@media(orientation:landscape) and (max-height:600px) and (max-width:1200px){.tile-grid{--tile-gap:clamp(2px,.36vw,4px)}.tile-face{box-shadow:0 3px 0 #a2b982,0 4px 4px #06291f70}.tile.selected .tile-face{outline-width:2px;outline-offset:1px;transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.tile.tile-wrong .tile-face{animation:none}}
