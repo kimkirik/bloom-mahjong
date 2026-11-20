@@ -23,6 +23,17 @@ export function findPath(board:number[],a:number,b:number):Point[]|null {
  return null;
 }
 export function findPair(board:number[]):[number,number]|null {for(let a=0;a<board.length;a++)if(board[a]>=0)for(let b=a+1;b<board.length;b++)if(board[a]===board[b]&&findPath(board,a,b))return [a,b];return null;}
+export function reshuffleBoard(board:number[],seed:number){
+ const open=board.map((tile,index)=>tile>=0?index:-1).filter((index):index is number=>index>=0);
+ const tiles=open.map(index=>board[index]);
+ const build=(values:number[])=>{const next=[...board];open.forEach((index,i)=>{next[index]=values[i];});return next;};
+ const rng=random(seed);
+ for(let attempt=0;attempt<240;attempt++){const next=build(shuffled(tiles,rng));if(findPair(next))return next;}
+ const first=tiles.find((tile,index)=>tiles.indexOf(tile)!==index);
+ if(first===undefined||open.length<2)return [...board];
+ const rest=[...tiles];rest.splice(rest.indexOf(first),1);rest.splice(rest.indexOf(first),1);
+ return build([first,first,...shuffled(rest,rng)]);
+}
 export function makeBoard(seed:number,stage:number){if(!Number.isInteger(stage)||stage<1||stage>STAGE_COUNT)throw new Error('존재하지 않는 단계입니다.');const rng=random(seed+stage*7919);const types=shuffled(Array.from({length:30},(_,i)=>i),rng).slice(0,STAGE_TYPES[stage-1]);const half=Array.from({length:60},(_,i)=>types[i%types.length]);let board=shuffled([...half,...half],rng);while(!findPair(board))board=shuffled(board,rng);return board;}
 export function newGame(seed:number,stageCount:number=STAGE_COUNT):GameState{if(stageCount!==STAGE_COUNT&&stageCount!==LEGACY_STAGE_COUNT)throw new Error('지원하지 않는 게임 구성입니다.');return {seed,board:makeBoard(seed,1),stage:1,stageCount,score:0,hints:3,remainingMs:STAGE_SECONDS[0]*1000,elapsed:0,status:'playing',matched:0,bonus:0};}
 export function applyEvent(state:GameState,event:GameEvent):GameState{
@@ -40,7 +51,7 @@ export function applyEvent(state:GameState,event:GameEvent):GameState{
  if(!findPath(s.board,a,b)){s.remainingMs=Math.max(0,s.remainingMs-10000);if(s.remainingMs===0)s.status='timeout';return s;}
  s.board[a]=-1;s.board[b]=-1;s.score+=200;s.matched++;s.remainingMs+=2000;
  if(s.board.every(t=>t<0)){s.bonus=s.stage*100+Math.ceil(s.remainingMs/1000)*10;s.score+=s.bonus;s.status=s.stage===s.stageCount?'won':'stageclear';}
- else if(!findPair(s.board))s.status='stuck';
+ else if(!findPair(s.board))s.board=reshuffleBoard(s.board,s.seed+s.stage*7919+s.matched*104729+s.elapsed);
  return s;
 }
 export function replay(seed:number,events:GameEvent[],stageCount:number=STAGE_COUNT){if(!Array.isArray(events)||events.length>10000)throw new Error('플레이 기록이 올바르지 않습니다.');return events.reduce(applyEvent,newGame(seed,stageCount));}

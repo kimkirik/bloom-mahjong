@@ -162,3 +162,5 @@ footer{min-height:76px;gap:12px;padding:12px 0}.stage-track{gap:7px}.stage-track
 @media(max-width:650px){.tile-grid{--tile-gap:2px}.tile-face{box-shadow:0 2px 0 #a2b982,0 3px 3px #173c2d}.tile.selected .tile-face{outline-width:2px;outline-offset:0}.modal-scroll{padding:48px 23px 28px}}
 @media(orientation:landscape) and (max-height:600px) and (max-width:1200px){.tile-grid{--tile-gap:clamp(2px,.36vw,4px)}.tile-face{box-shadow:0 3px 0 #a2b982,0 4px 4px #06291f70}.tile.selected .tile-face{outline-width:2px;outline-offset:1px;transform:translateY(-2px)}}
 @media(prefers-reduced-motion:reduce){.tile.tile-wrong .tile-face{animation:none}}
+
+.new-game-cta{min-height:66px;margin-top:18px!important;font-size:25px!important;letter-spacing:.4px;box-shadow:0 6px 0 #9c7449,0 12px 26px #f5c96e38!important}
