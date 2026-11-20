@@ -164,3 +164,14 @@ footer{min-height:76px;gap:12px;padding:12px 0}.stage-track{gap:7px}.stage-track
 @media(prefers-reduced-motion:reduce){.tile.tile-wrong .tile-face{animation:none}}
 
 .new-game-cta{min-height:66px;margin-top:18px!important;font-size:25px!important;letter-spacing:.4px;box-shadow:0 6px 0 #9c7449,0 12px 26px #f5c96e38!important}
+.end-modal .new-game-cta{margin:0 0 13px!important}
+dialog[aria-label="점수 저장"] .modal-scroll{padding:18px 34px 22px;overflow:hidden;max-height:calc(100dvh - 20px)}
+dialog[aria-label="점수 저장"] .modal-symbol{margin:0 auto 8px;width:36px;height:36px}
+dialog[aria-label="점수 저장"] .eyebrow{font-size:10px}
+dialog[aria-label="점수 저장"] h2{margin:6px 0;font-size:25px}
+dialog[aria-label="점수 저장"] .result-score{font-size:48px;margin:7px 0}
+dialog[aria-label="점수 저장"] .result-detail{padding:9px 0}
+dialog[aria-label="점수 저장"] form{margin-top:8px}
+dialog[aria-label="점수 저장"] form h3{margin:10px 0}
+dialog[aria-label="점수 저장"] .save-note{margin:7px 0 10px}
+@media(max-height:540px){dialog[aria-label="점수 저장"] .modal-scroll{padding:12px 24px 14px}dialog[aria-label="점수 저장"] .new-game-cta{min-height:46px;font-size:20px!important;margin-bottom:7px!important}dialog[aria-label="점수 저장"] .modal-symbol,dialog[aria-label="점수 저장"] .eyebrow{display:none}dialog[aria-label="점수 저장"] h2{font-size:20px;margin:3px 0}dialog[aria-label="점수 저장"] .result-score{font-size:38px;margin:2px 0}dialog[aria-label="점수 저장"] .result-detail{padding:5px 0;font-size:12px}dialog[aria-label="점수 저장"] form{margin-top:3px}dialog[aria-label="점수 저장"] form h3{font-size:15px;margin:4px 0}dialog[aria-label="점수 저장"] .name-label{font-size:12px;margin-bottom:3px}dialog[aria-label="점수 저장"] input[type=text]{padding:9px;font-size:15px}dialog[aria-label="점수 저장"] .save-note{display:none}dialog[aria-label="점수 저장"] .modal .primary,dialog[aria-label="점수 저장"] .primary{font-size:17px;padding:9px 16px;min-height:39px}dialog[aria-label="점수 저장"] .saved-message{margin:8px 0}}

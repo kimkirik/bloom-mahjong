@@ -1214,7 +1214,15 @@ export default function Home() {
       )}
       {overlay === "end" && (
         <Modal label="점수 저장" close={close}>
-          <div className="center-modal">
+          <div className="center-modal end-modal">
+            <button
+              className="primary wide new-game-cta"
+              type="button"
+              disabled={starting}
+              onClick={() => start(false)}
+            >
+              <Play /> 새 게임 시작
+            </button>
             <Trophy className="modal-symbol" />
             <span className="eyebrow">
               {game.status === "won"
@@ -1281,14 +1289,6 @@ export default function Home() {
                 >
                   {saving ? "점수를 저장하는 중…" : "점수 저장하기"}
                 </button>
-                <button
-                  className="text-button wide"
-                  type="button"
-                  disabled={saving || starting}
-                  onClick={() => start(false)}
-                >
-                  <Play /> 새 게임 시작
-                </button>
               </form>
             ) : (
               <>
@@ -1297,13 +1297,6 @@ export default function Home() {
                 </div>
                 <button className="primary wide" onClick={openScores}>
                   <Trophy /> 기록실에서 보기
-                </button>
-                <button
-                className="primary wide new-game-cta"
-                  onClick={() => start(false)}
-                  disabled={starting}
-                >
-                  <Play /> 새 게임 시작
                 </button>
               </>
             )}
