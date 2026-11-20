@@ -164,6 +164,17 @@ footer{min-height:76px;gap:12px;padding:12px 0}.stage-track{gap:7px}.stage-track
 @media(prefers-reduced-motion:reduce){.tile.tile-wrong .tile-face{animation:none}}
 
 .new-game-cta{min-height:66px;margin-top:18px!important;font-size:25px!important;letter-spacing:.4px;box-shadow:0 6px 0 #9c7449,0 12px 26px #f5c96e38!important}
+.landing-mode>header,.landing-mode>.game-top,.landing-mode>footer{display:none}
+.landing-mode .board-shell{margin:auto;width:min(680px,100%);min-height:min(620px,100dvh);flex:none;border:0;background:transparent;box-shadow:none;overflow:visible}
+.landing-mode .board-caption,.landing-mode .board,.landing-mode .time-track{display:none}
+.landing-mode .start-veil{position:relative;inset:auto;width:100%;height:100%;background:transparent;backdrop-filter:none}
+.landing-mode .start-card{width:min(430px,100%);padding:24px;text-align:center}
+.landing-mode .start-bouquet{margin-bottom:8px}
+.landing-mode .start-card h1{font-size:clamp(30px,5vw,48px);margin:4px 0 24px;color:#fff1b5}
+.landing-start{width:min(350px,100%);min-height:68px;font-size:25px!important}
+.landing-ranking{display:inline-flex;align-items:center;justify-content:center;gap:7px;margin-top:14px;padding:8px 13px!important;font-family:'BLOOM Jua',sans-serif;font-size:15px!important;color:#c9e6d5}
+.landing-ranking svg{width:17px;height:17px;color:#ffe494}
+@media(max-height:600px){.landing-mode .board-shell{min-height:100dvh}.landing-mode .start-bouquet{scale:.8;margin:-8px 0}.landing-mode .start-card h1{font-size:30px;margin:0 0 12px}.landing-start{min-height:52px;font-size:20px!important}.landing-ranking{margin-top:8px}}
 .end-modal .new-game-cta{margin:0 0 13px!important}
 dialog[aria-label="점수 저장"] .modal-scroll{padding:18px 34px 22px;overflow:hidden;max-height:calc(100dvh - 20px)}
 dialog[aria-label="점수 저장"] .modal-symbol{margin:0 auto 8px;width:36px;height:36px}

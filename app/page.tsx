@@ -749,7 +749,7 @@ export default function Home() {
   const paused = started && !!overlay && game.status === "playing";
   return (
     <main
-      className={`game-app ${started && remaining <= 30000 && game.status === "playing" ? "time-pressure" : ""} ${combo >= 6 ? "bloom-streak" : ""}`}
+      className={`game-app ${!started ? "landing-mode" : ""} ${started && remaining <= 30000 && game.status === "playing" ? "time-pressure" : ""} ${combo >= 6 ? "bloom-streak" : ""}`}
     >
       <div className="garden-lights" aria-hidden="true">
         <i />
@@ -935,35 +935,18 @@ export default function Home() {
                 ))}
                 <Sparkles />
               </div>
-              <span className="eyebrow">BLOOM MAHJONG</span>
-              <h2>
-                톡! 톡! 연결하면
-                <br />
-                <em>행복이 팡!</em>
-              </h2>
-              <p>
-                꽃과 과일을 맞추고, 콤보를 피워봐요.
-                <br />
-                반짝이는 {STAGE_COUNT}개의 정원이 기다려요!
-              </p>
+              <h1>꽃과 과일 마작</h1>
               <button
-                className="primary"
+                className="primary landing-start"
                 onClick={() => start(true)}
                 disabled={starting}
               >
                 <Play />
-                {starting ? "정원을 준비하는 중…" : "전체화면으로 시작"}
+                {starting ? "정원을 준비하는 중…" : "게임 시작"}
               </button>
-              <button
-                className="text-button"
-                onClick={() => start(false)}
-                disabled={starting}
-              >
-                현재 화면으로 시작
+              <button className="text-button landing-ranking" onClick={openScores}>
+                <Trophy /> 랭킹 보기
               </button>
-              <span className="start-note">
-                120개의 타일 · {STAGE_COUNT}개의 스테이지
-              </span>
             </div>
           </div>
         )}
